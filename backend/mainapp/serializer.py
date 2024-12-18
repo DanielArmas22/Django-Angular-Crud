@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import Usuario
+from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
@@ -17,3 +18,20 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
+class LoginSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True, write_only=True)
+
+    def validate(self, data):
+        username = data.get("username")
+        password = data.get("password")
+
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if not user:
+                raise serializers.ValidationError("Credenciales inválidas.")
+        else:
+            raise serializers.ValidationError("Se requieren username y password.")
+        
+        data["user"] = user
+        return data
