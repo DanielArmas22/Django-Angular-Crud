@@ -3,10 +3,10 @@ from .models import Usuario
 from django.contrib.auth import authenticate
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-
+    # id = serializers.IntegerField(read_only=True)
     class Meta:
         model = Usuario
-        fields = ['first_name','last_name','dni','telefono','username', 'email', 'password']
+        fields = ['id','first_name','last_name','dni','telefono','username', 'email', 'password']
 
     def create(self, validated_data):
         # Crear un usuario con un hash de contraseña
