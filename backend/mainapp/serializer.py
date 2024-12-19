@@ -7,6 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = Usuario
         fields = ['id','first_name','last_name','dni','telefono','username', 'email', 'password']
+        # fields = '__All__'
 
     def create(self, validated_data):
         # Crear un usuario con un hash de contraseña
@@ -20,28 +21,6 @@ class UserSerializer(serializers.ModelSerializer):
             password=validated_data['password']
         )
         return user
-    # def update(self, instance, validated_data):
-    #     # Actualizar un usuario sin cambiar la contraseña
-    #     instance.first_name = validated_data.get('first_name', instance.first_name)
-    #     instance.last_name = validated_data.get('last_name', instance.last_name)
-    #     instance.dni = validated_data.get('dni', instance.dni)
-    #     instance.telefono = validated_data.get('telefono', instance.telefono)
-    #     instance.username = validated_data.get('username', instance.username)
-    #     instance.email = validated_data.get('email', instance.email)
-    #     instance.save()
-    #     return instance
-    # def update_with_password(self, instance, validated_data):
-    #     # Actualizar un usuario y cambiar la contraseña
-    #     instance.first_name = validated_data.get('first_name', instance.first_name)
-    #     instance.last_name = validated_data.get('last_name', instance.last_name)
-    #     instance.dni = validated_data.get('dni', instance.dni)
-    #     instance.telefono = validated_data.get('telefono', instance.telefono)
-    #     instance.username = validated_data.get('username', instance.username)
-    #     instance.email = validated_data.get('email', instance.email)
-    #     if 'password' in validated_data:
-    #         instance.set_password(validated_data['password'])
-    #     instance.save()
-    #     return instance
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
     password = serializers.CharField(required=True, write_only=True)
