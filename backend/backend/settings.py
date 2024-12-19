@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_angular_db',
         'USER': 'root',
-        'PASSWORD':'',
+        'PASSWORD':'tu_contraseña',
         'HOST':'localhost',
         'PORT':'3306'
     }

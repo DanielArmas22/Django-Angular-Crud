@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
+
 export class AuthService {
   url = 'http://localhost:8000/api/login/';
   constructor(private http: HttpClient) {}
@@ -12,17 +13,20 @@ export class AuthService {
   public verificar(usuario: string, clave: string) {
     console.log('verificar', usuario, clave);
     const body = { username: usuario, password: clave };
-    // Obtener el response del servidor
-    this.http.post(this.url, body).subscribe(
-      (response) => {
-        console.log('Response:', response);
-      },
-      (error) => {
-        console.error('Error:', error);
-      }
+    
+    return this.http.post(this.url, body).pipe(
+      map((response: any) => {
+        if (response && response.token) {
+          
+          localStorage.setItem('userToken', response.token);  
+          localStorage.setItem('userId', response.userId);    
+          console.log('User Logged In:', response);
+        }
+        return response;
+      })
     );
-    return this.http.post(this.url, body);
   }
+
   public createUser(user: any) {
     return this.http.post('http://localhost:8000/api/users/v1/usuarios/', user);
   }
@@ -47,4 +51,7 @@ export class AuthService {
       `http://localhost:8000/api/users/v1/usuarios/${id}/`
     );
   }
+  
+  
 }
+

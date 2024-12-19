@@ -94,7 +94,8 @@ export class UsersComponent implements OnInit {
       this.authService.createUser(this.user).subscribe(async (resp: any) => {
         console.log('resp', resp);
         if (resp) {
-          alert('Creado');
+          alert('Usuario Creado');
+          location.reload(); 
         } else {
           this.passwordExists = false;
           console.log('Usuario o contraseña incorrectos');
@@ -119,8 +120,10 @@ export class UsersComponent implements OnInit {
   public deleteUser(user: User): void {
     console.log('deleteUser', user.id);
     this.authService.deleteUser(user.id).subscribe((resp: any) => {
-      if (resp) {
-        alert('Eliminado');
+      console.log('Respuesta del servidor:', resp);  // Verifica la respuesta
+      if (!resp) {
+        alert('Usuario Eliminado');
+        location.reload();
       } else {
         this.passwordExists = false;
         console.log('Usuario o contraseña incorrectos');
