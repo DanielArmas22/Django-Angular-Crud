@@ -5,6 +5,7 @@ import { AuthService } from '../services/auth.service';
 import { request } from 'http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { HomeComponent } from '../home/home.component';
 
 interface User {
   id: number;
@@ -19,7 +20,7 @@ interface User {
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule, HomeComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.css',
 })
