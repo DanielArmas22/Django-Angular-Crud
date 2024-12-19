@@ -1,1 +1,61 @@
-<p>login works!</p>
+<main class="login">
+
+  <div class="content mt-5">
+
+    <form [formGroup]="frmLogin" (ngSubmit)="submitLogin()">
+
+      <h4 class="form-title" style="text-align: left">Inicio de
+        Sesión</h4>
+      <div class="form-group">
+        <label class="control-label">USUARIO:</label>
+        <div class="input-icon">
+          <i class="fas fa-user"></i>
+          <input class="form-control" type="text" placeholder="Ingrese usuario" id="username"
+            formControlName="username" />
+
+          <div *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+            <small class="error-message" *ngIf="username?.errors?.['required']">Ingrese usuario.</small>
+            <small class="error-message" *ngIf="username?.errors?.['username']">Ingrese un usuario válido.</small>
+          </div>
+          <div *ngIf="userExists === false">
+            <small class="error-message">Usuario no válido.</small>
+          </div>
+
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">CONTRASEÑA:</label>
+        <div class="input-icon">
+          <i class="fas fa-lock"></i>
+          <input class="form-control" type="password" placeholder="Ingrese contraseña" id="password"
+            formControlName="password" />
+          <div *ngIf="password?.invalid && (password?.dirty || 
+                      password?.touched)">
+            <small class="error-message" *ngIf="password?.errors?.['required']">Ingrese su contraseña
+              .</small>
+          </div>
+          <div *ngIf="passwordExists === false">
+            <small class="error-message">Contraseña no
+              válido.</small>
+          </div>
+
+        </div>
+      </div>
+
+      <hr />
+      <div class="d-grid mx-auto">
+        <button class="btn btn-success">
+          Ingresar </button>
+      </div>
+      <hr />
+
+    </form>
+  </div>
+  <div class="copyright">
+    2024 &copy; CLASE S.R.L
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384
+                      YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+</main>
