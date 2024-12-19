@@ -6,6 +6,16 @@ import { request } from 'http';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
+interface User {
+  id: number;
+  first_name: string;
+  last_name: string;
+  dni: string;
+  telefono: string;
+  username: string;
+  email: string;
+  password: string;
+}
 @Component({
   selector: 'app-users',
   standalone: true,
@@ -94,7 +104,7 @@ export class UsersComponent implements OnInit {
       console.log('Error en la validación', this.frmLogin);
     }
   }
-  public editUser(user: any): void {
+  public editUser(user: User): void {
     this.authService.updateUser(user).subscribe((resp: any) => {
       if (resp) {
         alert('Actualizado');
@@ -105,7 +115,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  public deleteUser(user: any): void {
+  public deleteUser(user: User): void {
     console.log('deleteUser', user.id);
     this.authService.deleteUser(user.id).subscribe((resp: any) => {
       if (resp) {
