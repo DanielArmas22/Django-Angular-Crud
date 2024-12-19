@@ -10,7 +10,13 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
+  // styleUrls: ['./login.component.css'],
+  styles: [
+    `
+      @import url('../../../assets/css/login.css');
+      // @import url('../../../assets/css/style.css');
+    `,
+  ],
 })
 export class LoginComponent implements OnInit {
   public frmLogin!: FormGroup;
