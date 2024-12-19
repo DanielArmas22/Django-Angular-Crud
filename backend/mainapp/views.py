@@ -6,6 +6,7 @@ from .serializer import UserSerializer, LoginSerializer
 from rest_framework.authtoken.models import Token
 from .models import Usuario
 
+# @api_view(['GET'])
 class UserRegistrationView(APIView):
     def post(self, request):
         serializer = UserSerializer(data=request.data)
@@ -13,6 +14,7 @@ class UserRegistrationView(APIView):
             serializer.save() #ejecutar la funcion create  o update del serializer
             return Response({'message': 'Usuario creado con éxito'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
 class LoginView(APIView):
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
